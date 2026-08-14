@@ -1,4 +1,4 @@
-
+--https://raw.githubusercontent.com/skekkstunsua-lgtm/methhook/refs/heads/main/EnvLib.lua
 
 local EnvLib = {};
 local env = getfenv()
@@ -48,6 +48,8 @@ EnvLib.functions = {
     cleardrawcache = {"cleardrawcache"; "Drawing.clear"; "Drawing.clearall"};
     getrenderproperty = {"getrenderproperty"; "Drawing.getrenderproperty"};
     setrenderproperty = {"setrenderproperty"; "Drawing.setrenderproperty"};
+    filtergc = {"filtergc"};
+    getgc = {"getgc"};
 };
 
 resolvePath = function(opt, tbl)
