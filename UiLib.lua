@@ -2,6 +2,10 @@ if getgenv().Library and getgenv().Library.Exit then
 	getgenv().Library:Exit()
 end
 
+if not game:IsLoaded() then 
+    game.Loaded:Wait()
+end
+
 cloneref = cloneref or function(Object) return Object end
 
 local EnvLib = loadstring(game:HttpGet("https://gist.githubusercontent.com/skekkstunsua-lgtm/0e3a63d0e628d59210efd493652ba58d/raw/1e8fcf285d49915ca9ea040e7eb978eee6538792/EnvLib.lua"))()
@@ -33,7 +37,7 @@ Library = {
 		Assets = "/Assets",
 		Configs = "/Configs"
 	},
-	FontSize = 8,
+	FontSize = 13,
 	Animation = {
 		Time = 0.2,
 		Style = "Quart",
@@ -111,16 +115,16 @@ do
 
 	local Themes = {
 		["Preset"] = {
-			["Background"]      = Color3.fromRGB(18, 22, 14),
-			["Inline"]          = Color3.fromRGB(24, 28, 18),
-			["Content"]         = Color3.fromRGB(15, 18, 11),
-			["Text"]            = Color3.fromRGB(148, 142, 90),
-			["Outline 1"]       = Color3.fromRGB(35, 40, 24),
-			["Outline 2"]       = Color3.fromRGB(28, 33, 19),
-			["Outline 3"]       = Color3.fromRGB(12, 15, 8),
-			["Outline 4"]       = Color3.fromRGB(8, 10, 5),
-			["Inactive Text"]   = Color3.fromRGB(80, 76, 50),
-			["Accent"]          = Color3.fromRGB(168, 158, 68),
+			["Background"] = Color3.fromRGB(18, 22, 14),
+			["Inline"] = Color3.fromRGB(24, 28, 18),
+			["Content"] = Color3.fromRGB(15, 18, 11),
+			["Text"] = Color3.fromRGB(148, 142, 90),
+			["Outline 1"] = Color3.fromRGB(35, 40, 24),
+			["Outline 2"] = Color3.fromRGB(28, 33, 19),
+			["Outline 3"] = Color3.fromRGB(12, 15, 8),
+			["Outline 4"] = Color3.fromRGB(8, 10, 5),
+			["Inactive Text"] = Color3.fromRGB(80, 76, 50),
+			["Accent"] = Color3.fromRGB(110, 238, 255),
 			["Hovered Element"] = Color3.fromRGB(30, 35, 21),
 		}
 	}
@@ -672,6 +676,15 @@ do
 		Library:Connect(Object.MouseLeave, OnHoverLeave)
 	end
 
+    Library.AddCorner = function(Self, Radius)
+    	Library:Create("UICorner", {
+    		Name = "\0",
+    		Parent = Self.Instance,
+    		CornerRadius = UDim.new(0, Radius or 4)
+    	})
+    	return Self
+    end
+
 	Library.Holder = Library:Create("ScreenGui", {
 		Parent = gethui(),
 		IgnoreGuiInset = true,
@@ -775,7 +788,7 @@ do
 					Size = UDim2.new(0, 204, 0, 178),
 					BorderSizePixel = 0,
 					BackgroundColor3 = Library.Theme["Background"]
-				}):AddToTheme({ BackgroundColor3 = "Background" })
+				}):AddToTheme({ BackgroundColor3 = "Background" }):AddCorner(4)
 
 				Items["CurrentColor"] = Library:Create("Frame", {
 					Name = "\0",
@@ -1299,7 +1312,7 @@ do
 					BorderSizePixel = 0,
 					AutomaticSize = Enum.AutomaticSize.Y,
 					BackgroundColor3 = Library.Theme["Background"]
-				}):AddToTheme({ BackgroundColor3 = "Background" })
+				}):AddToTheme({ BackgroundColor3 = "Background" }):AddCorner(4)
 
 				Library:Create("UIStroke", {
 					Name = "\0",
@@ -1618,7 +1631,7 @@ do
 				BorderSizePixel = 0,
 				AutomaticSize = Enum.AutomaticSize.X,
 				BackgroundColor3 = Library.Theme["Background"]
-			}):AddToTheme({ BackgroundColor3 = "Background" })
+			}):AddToTheme({ BackgroundColor3 = "Background" }):AddCorner(4)
 
 			Items["Watermark"]:MakeDraggable()
 
@@ -1689,7 +1702,7 @@ do
 				TextSize = Library.FontSize,
 				Parent = Items["Watermark"].Instance,
 				TextColor3 = Library.Theme["Inactive Text"],
-				Text = "|",
+				Text = "",
 				Size = UDim2.new(0, 0, 0, 10),
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
@@ -1874,10 +1887,10 @@ do
 				Parent = Library.Holder.Instance,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.new(0.5, 0, 0.5, 0),
-				Size = UDim2.new(0, 500, 0, 380),
+				Size = UDim2.new(0, 500, 0, 430),
 				BorderSizePixel = 0,
 				BackgroundColor3 = Library.Theme["Background"]
-			}):AddToTheme({ BackgroundColor3 = "Background" })
+			}):AddToTheme({ BackgroundColor3 = "Background" }):AddCorner(6)
 
 			Items["MainFrame"]:MakeDraggable()
 			Items["MainFrame"]:MakeResizeable(Vector2.new(Items["MainFrame"].Instance.AbsoluteSize.X, Items["MainFrame"].Instance.AbsoluteSize.Y))
@@ -1960,7 +1973,7 @@ do
 				Parent = Items["Pages"].Instance,
 				FillDirection = Enum.FillDirection.Horizontal,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
-				Padding = UDim.new(0, 2),
+				Padding = UDim.new(0, 6),
 				SortOrder = Enum.SortOrder.LayoutOrder
 			})
 
@@ -2112,10 +2125,11 @@ do
 			Items["LeftColumn"] = Library:Create("ScrollingFrame", {
 				Name = "\0",
 				Parent = Items["Page"].Instance,
-				ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0),
+				ScrollBarImageColor3 = "Accent",
 				Active = true,
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				ScrollBarThickness = 0,
+                ScrollBarImageColor3 = Library.Theme["Accent"],
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, 0),
 				BorderSizePixel = 0,
@@ -2141,10 +2155,11 @@ do
 			Items["RightColumn"] = Library:Create("ScrollingFrame", {
 				Name = "\0",
 				Parent = Items["Page"].Instance,
-				ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0),
+				ScrollBarImageColor3 = "Accent",
 				Active = true,
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				ScrollBarThickness = 0,
+                ScrollBarImageColor3 = Library.Theme["Accent"],
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, 0),
 				BorderSizePixel = 0,
@@ -2218,7 +2233,7 @@ do
 			Page:Turn()
 		end
 
-		Items["Separator"].Instance.Visible = #Page.Window.Pages > 0
+		Items["Separator"].Instance.Visible = false
 
 		table.insert(Page.Window.Pages, Page)
 		return setmetatable(Page, Library)
@@ -2245,7 +2260,7 @@ do
 				BorderSizePixel = 0,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BackgroundColor3 = Library.Theme["Inline"]
-			}):AddToTheme({ BackgroundColor3 = "Inline" })
+			}):AddToTheme({ BackgroundColor3 = "Inline" }):AddCorner(4)
 
 			Library:Create("UIStroke", {
 				Name = "\0",
@@ -2375,7 +2390,7 @@ do
 				Size = UDim2.new(0, 8, 0, 8),
 				BorderSizePixel = 0,
 				BackgroundColor3 = Library.Theme["Content"]
-			}):AddToTheme({ BackgroundColor3 = "Content" })
+			}):AddToTheme({ BackgroundColor3 = "Content" }):AddCorner(3)
 
 			Library:Create("UIStroke", {
 				Name = "\0",
@@ -2402,7 +2417,7 @@ do
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				BorderSizePixel = 0,
 				BackgroundColor3 = Library.Theme["Accent"]
-			}):AddToTheme({ BackgroundColor3 = "Accent" })
+			}):AddToTheme({ BackgroundColor3 = "Accent" }):AddCorner(2)
 
 			Items["Text"] = Library:Create("TextLabel", {
 				Name = "\0",
@@ -2649,12 +2664,13 @@ do
 				TextSize = Library.FontSize,
 				Parent = Items["Button"].Instance,
 				TextColor3 = Color3.fromRGB(0, 0, 0),
-				AutoButtonColor = false,
+				Text = "",
+                AutoButtonColor = false,
 				Position = UDim2.new(0, 1, 0, 1),
 				Size = UDim2.new(1, -2, 1, -2),
 				BorderSizePixel = 0,
 				BackgroundColor3 = Library.Theme["Content"]
-			}):AddToTheme({ BackgroundColor3 = "Content" })
+			}):AddToTheme({ BackgroundColor3 = "Content" }):AddCorner(4)
 
 			Library:Create("UIStroke", {
 				Name = "\0",
@@ -2727,7 +2743,7 @@ do
 			Min = Params.Min or Params.min or 0,
 			Max = Params.Max or Params.max or 100,
 			Callback = Params.Callback or Params.callback or function() end,
-			Decimals = Params.Decimals or Params.decimals or 0,
+			Decimals = Params.Decimals or Params.decimals or 0.01,
 			Suffix = Params.Suffix or Params.suffix or "",
 			Window = Self.Window,
 			Page = Self.Page,
@@ -2788,7 +2804,7 @@ do
 				Size = UDim2.new(1, -2, 0, 3),
 				BorderSizePixel = 0,
 				BackgroundColor3 = Library.Theme["Content"]
-			}):AddToTheme({ BackgroundColor3 = "Content" })
+			}):AddToTheme({ BackgroundColor3 = "Content" }):AddCorner(2)
 
 			Library:Create("UIStroke", {
 				Name = "\0",
@@ -2804,7 +2820,7 @@ do
 				Size = UDim2.new(0.5, 0, 1, 0),
 				BorderSizePixel = 0,
 				BackgroundColor3 = Library.Theme["Accent"]
-			}):AddToTheme({ BackgroundColor3 = "Accent" })
+			}):AddToTheme({ BackgroundColor3 = "Accent" }):AddCorner(2)
 
 			Items["Value"] = Library:Create("TextLabel", {
 				Name = "\0",
@@ -2967,7 +2983,7 @@ do
 				Size = UDim2.new(1, -2, 0, 14),
 				BorderSizePixel = 0,
 				BackgroundColor3 = Library.Theme["Inline"]
-			}):AddToTheme({ BackgroundColor3 = "Inline" })
+			}):AddToTheme({ BackgroundColor3 = "Inline" }):AddCorner(4)
 
 			Library:Create("UIStroke", {
 				Name = "\0",
@@ -3035,7 +3051,7 @@ do
 				BorderSizePixel = 0,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BackgroundColor3 = Library.Theme["Background"]
-			}):AddToTheme({ BackgroundColor3 = "Background" })
+			}):AddToTheme({ BackgroundColor3 = "Background" }):AddCorner(4)
 
 			Library:Create("UIStroke", {
 				Name = "\0",
@@ -3525,7 +3541,7 @@ do
 				Active = true,
 				BorderSizePixel = 0,
 				BackgroundColor3 = Library.Theme["Inline"]
-			}):AddToTheme({ BackgroundColor3 = "Inline" })
+			}):AddToTheme({ BackgroundColor3 = "Inline" }):AddCorner(4)
 
 			Library:Create("UIStroke", {
 				Name = "\0",
@@ -3770,9 +3786,149 @@ do
 			end
 		end
 	end
+    Library.InitLua = function(Self)
+        local LuaPage = Self:Page({ Name = "lua" })
+        local EditorSection = LuaPage:Section({ Name = "script", Side = 1 })
+        local HelpSection = LuaPage:Section({ Name = "reference", Side = 2 })
+	   
+        HelpSection:Label({ Name = "Tab(name)" })
+	    HelpSection:Label({ Name = "makes a new tab, returns it" })
+	    HelpSection:Label({ Name = "" })
+	    HelpSection:Label({ Name = "tab:Section{ Name, Side }" })
+	    HelpSection:Label({ Name = "Side 1 left, 2 right" })
+	    HelpSection:Label({ Name = "" })
+	    HelpSection:Label({ Name = "section:Toggle{ Name, Flag }" })
+	    HelpSection:Label({ Name = "section:Button{ Name, Callback }" })
+	    HelpSection:Label({ Name = "section:Slider{ Name, Min, Max }" })
+	    HelpSection:Label({ Name = "section:Dropdown{ Name, Items }" })
+	    HelpSection:Label({ Name = "" })
+	    HelpSection:Label({ Name = "Notify(text, time)" })
+	    HelpSection:Label({ Name = "" })
+	    HelpSection:Label({ Name = "example:" })
+	    HelpSection:Label({ Name = "local t = Tab(\"custom\")" })
+	    HelpSection:Label({ Name = "local s = t:Section{ Name = \"x\" }" })
+	    HelpSection:Label({ Name = "s:Toggle{ Name = \"hi\" }" })
+
+        local EditorHolder = Library:Create("Frame", {
+            Parent = EditorSection.Items["Content"].Instance,
+            Size = UDim2.new(1, 0, 0, 240),
+            ClipsDescendants = true,
+            BorderSizePixel = 0,
+            BackgroundColor3 = Library.Theme["Content"]
+        }):AddToTheme({ BackgroundColor3 = "Content" }):AddCorner(4)
+
+        Library:Create("UIStroke", {
+            Parent = EditorHolder.Instance,
+            ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+            LineJoinMode = Enum.LineJoinMode.Miter,
+            Color = Library.Theme["Outline 1"]
+        }):AddToTheme({ Color = "Outline 1" })
+
+        Library:Create("UIStroke", {
+            Parent = EditorHolder.Instance,
+            ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+            LineJoinMode = Enum.LineJoinMode.Miter,
+            Color = Library.Theme["Outline 3"],
+            BorderOffset = UDim.new(0, 1)
+        }):AddToTheme({ Color = "Outline 3" })
+
+        local Editor = Library:Create("TextBox", {
+            FontFace = Library.Font,
+            TextSize = Library.FontSize,
+            Parent = EditorHolder.Instance,
+            MultiLine = true,
+            ClearTextOnFocus = false,
+            TextWrapped = true,
+            TextXAlignment = Enum.TextXAlignment.Left,
+            TextYAlignment = Enum.TextYAlignment.Top,
+            PlaceholderColor3 = Library.Theme["Inactive Text"],
+            PlaceholderText = `local MyTab = Tab("custom")...`,
+            Size = UDim2.new(1, -10, 1, -8),
+            Position = UDim2.new(0, 5, 0, 4),
+            TextColor3 = Library.Theme["Text"],
+            Text = "",
+            CursorPosition = -1,
+            BackgroundTransparency = 1,
+            BorderSizePixel = 0
+        }):AddToTheme({ TextColor3 = "Text", PlaceholderColor3 = "Inactive Text" })
+
+        local LuaEnv = setmetatable({}, { __index = getfenv() })
+
+        LuaEnv.Window = Self
+        LuaEnv.Library = Library
+        LuaEnv.Flags = Library.Flags
+
+        LuaEnv.Tab = function(Name)
+            return Self:Page({ Name = Name or "tab" })
+        end
+
+        LuaEnv.Notify = function(Text, Duration)
+            Library:Notification({ Name = tostring(Text), Time = Duration or 3 })
+        end
+
+        local RunCode = function(Source)
+            if Source == "" then
+                return
+            end
+
+            local Chunk, CompileError = loadstring(Source)
+
+            if not Chunk then
+                Library:Notification({ Name = "compile error", Time = 4 })
+                warn(CompileError)
+                return
+            end
+
+            setfenv(Chunk, LuaEnv)
+
+            local Success, Result = pcall(Chunk)
+
+            if not Success then
+                Library:Notification({ Name = "runtime error", Time = 4 })
+                warn(Result)
+                return
+            end
+
+            Library:Notification({ Name = "executed", Time = 2 })
+        end
+
+        EditorSection:Button({
+            Name = "execute in client state",
+            Callback = function()
+                RunCode(Editor.Instance.Text)
+            end
+        })
+
+        EditorSection:Button({
+            Name = "clear",
+            Callback = function()
+                Editor.Instance.Text = ""
+            end
+        })
+    end
 end
 
 getgenv().Library = Library
+--[[
+local Lib = Library
 
 
+local Win = Lib:Window({ Name = "methhack.cc" })
+
+local Pages = { --// Pages.
+    combat = Win:Page({ Name = "combat" });
+    visuals = Win:Page({ Name = "visuals" });
+    misc = Win:Page({ Name = "misc" });
+    exploits = Win:Page({ Name = "exploits" });
+}
+
+local Sections = {
+
+}
+
+local Wm = Lib:Watermark({ Name = "methhack.cc", SubName = "v1.0" })
+Lib:Notification({ Name = "loaded", Time = 3 })
+Win:InitLua()
+Win:InitWindow()
+]]
 return Library
