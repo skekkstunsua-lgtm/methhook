@@ -32,7 +32,7 @@ local Mouse = cloneref(LocalPlayer:GetMouse())
 Library = {
 	Flags = {},
 	MenuKeybind = tostring(Enum.KeyCode.RightShift),
-	Directory = "SecretLib",
+	Directory = "uraniumlib",
 	Folders = {
 		Assets = "/Assets",
 		Configs = "/Configs"
@@ -124,7 +124,7 @@ do
 			["Outline 3"] = Color3.fromRGB(12, 15, 8),
 			["Outline 4"] = Color3.fromRGB(8, 10, 5),
 			["Inactive Text"] = Color3.fromRGB(80, 76, 50),
-			["Accent"] = Color3.fromRGB(110, 238, 255),
+			["Accent"] = Color3.fromRGB(186, 212, 135),
 			["Hovered Element"] = Color3.fromRGB(30, 35, 21),
 		}
 	}
