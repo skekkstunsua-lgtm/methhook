@@ -115,17 +115,17 @@ do
 
 	local Themes = {
 		["Preset"] = {
-			["Background"] = Color3.fromRGB(18, 22, 14),
-			["Inline"] = Color3.fromRGB(24, 28, 18),
-			["Content"] = Color3.fromRGB(15, 18, 11),
-			["Text"] = Color3.fromRGB(148, 142, 90),
-			["Outline 1"] = Color3.fromRGB(35, 40, 24),
-			["Outline 2"] = Color3.fromRGB(28, 33, 19),
+			["Background"] = Color3.fromRGB(21, 21, 21),
+			["Inline"] = Color3.fromRGB(25, 25, 25),
+			["Content"] = Color3.fromRGB(20, 20, 20),
+			["Text"] = Color3.fromRGB(133, 133, 133),
+			["Outline 1"] = Color3.fromRGB(49, 49, 49),
+			["Outline 2"] = Color3.fromRGB(58, 58, 58),
 			["Outline 3"] = Color3.fromRGB(12, 15, 8),
-			["Outline 4"] = Color3.fromRGB(8, 10, 5),
-			["Inactive Text"] = Color3.fromRGB(80, 76, 50),
-			["Accent"] = Color3.fromRGB(186, 212, 135),
-			["Hovered Element"] = Color3.fromRGB(30, 35, 21),
+			["Outline 4"] = Color3.fromRGB(16, 16, 16),
+			["Inactive Text"] = Color3.fromRGB(84, 84, 84),
+			["Accent"] = Color3.fromRGB(135, 202, 212),
+			["Hovered Element"] = Color3.fromRGB(31, 31, 31),
 		}
 	}
 
@@ -3932,4 +3932,3 @@ Win:InitLua()
 Win:InitWindow()
 ]]
 return Library
---
