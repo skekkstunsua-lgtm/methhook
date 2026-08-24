@@ -192,8 +192,8 @@ end;
 
 local function buildEntry(character, ownerPlayer)
 	local hum = character:FindFirstChildOfClass('Humanoid');
-	local root = (hum and hum.RootPart) or character:FindFirstChild('HumanoidRootPart');
-
+    local root = (hum and hum.RootPart) or character:FindFirstChild('HumanoidRootPart') or character:FindFirstChild('RootPart');
+    
 	if not root then
 		return nil;
 	end;
