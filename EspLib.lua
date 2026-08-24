@@ -811,8 +811,9 @@ local function update()
 		local chr = D.character;
 		local hum = D.humanoid;
 		local rt = D.root;
-
-		local health = hum and hum.Health or 1;
+		local health = (hum and hum.MaxHealth > 0) and hum.Health or 1;
+		
+		--local health = hum and hum.Health or 1;
 
 		if not chr.Parent or health <= 0 or not rt.Parent then
 			if E.Holder.Visible then
