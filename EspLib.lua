@@ -3,7 +3,7 @@ local esp = {};
 local item_esp = {};
 esp.item = item_esp;
 
---github pls update the repo faster holy shit
+--yo
 
 local RunService = game:GetService('RunService');
 local CoreGui = game:GetService('CoreGui');
@@ -192,7 +192,7 @@ end;
 --#region entry building
 
 local function buildEntry(character, ownerPlayer)
-	local hum = character:FindFirstChildOfClass('Humanoid');
+	local hum = character:FindFirstChildWhichIsA('Humanoid');
     local root = (hum and hum.RootPart) or character:FindFirstChild('HumanoidRootPart') or character:FindFirstChild('RootPart');
     
 	if not root then
