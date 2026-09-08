@@ -561,18 +561,8 @@ local function applyToAll(key, value)
 		end;
 
         if key == 'name' then
-            if value then
-                local pos = options.namePosition
-                local horiz = pos == 'Top' or pos == 'Bottom'
-                E.Text.Name = pos
-                E.Text.Parent = E[pos .. 'Texts'] or E.Holder
-                E.Text.AutomaticSize = horiz and Enum.AutomaticSize.Y or Enum.AutomaticSize.XY
-                E.Text.TextXAlignment = horiz and Enum.TextXAlignment.Center
-                    or Enum.TextXAlignment[pos == 'Right' and 'Left' or 'Right']
-            else
-                E.Text.Parent = CacheGui
-            end
-        end
+            E.Text.Parent = value and E.Holder or CacheGui;
+        end;
 
 		if key == 'nameColor' then
 			E.Text.TextColor3 = value;
@@ -593,18 +583,8 @@ local function applyToAll(key, value)
 		end;
         
         if key == 'distance' then
-            if value then
-                local pos = options.distancePosition
-                local horiz = pos == 'Top' or pos == 'Bottom'
-                E.Distance.Name = pos
-                E.Distance.Parent = E[pos .. 'Texts'] or E.Holder
-                E.Distance.AutomaticSize = horiz and Enum.AutomaticSize.Y or Enum.AutomaticSize.XY
-                E.Distance.TextXAlignment = horiz and Enum.TextXAlignment.Center
-                    or Enum.TextXAlignment[pos == 'Right' and 'Left' or 'Right']
-            else
-                E.Distance.Parent = CacheGui
-            end
-        end
+            E.Distance.Parent = value and E.Holder or CacheGui;
+        end;
 
 		if key == 'distanceColor' then
 			E.Distance.TextColor3 = value;
