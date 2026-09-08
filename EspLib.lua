@@ -2,7 +2,9 @@
 local esp = {};
 local item_esp = {};
 esp.item = item_esp;
---n
+
+--github pls update the repo faster holy shit
+
 local RunService = game:GetService('RunService');
 local CoreGui = game:GetService('CoreGui');
 
