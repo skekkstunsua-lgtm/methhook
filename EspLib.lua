@@ -2,7 +2,7 @@
 local esp = {};
 local item_esp = {};
 esp.item = item_esp;
---nig
+--nih
 
 local RunService = game:GetService('RunService');
 local CoreGui = game:GetService('CoreGui');
