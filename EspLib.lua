@@ -3,7 +3,7 @@ local esp = {};
 local item_esp = {};
 esp.item = item_esp;
 
---yo
+--yo bro pls upd github pls
 
 local RunService = game:GetService('RunService');
 local CoreGui = game:GetService('CoreGui');
